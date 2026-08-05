@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <rect width="28" height="28" fill="#0a0a0b"/>
+  <defs>
+    <mask id="cut">
+      <rect width="28" height="28" fill="white"/>
+      <path d="M 3.777 20.828 A 12.3 4.55 -33.0 0 1 10.110 11.154" fill="none" stroke="black" stroke-width="2.470"/>
+      <circle cx="4.676" cy="16.425" r="2.3" fill="black"/>
+    </mask>
+  </defs>
+  <g>
+    <g mask="url(#cut)">
+      <ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7"
+        stroke-width="0.95" transform="rotate(-33.0 14 14)"/>
+      <polygon points="15.108,3.458 15.231,13.003 23.150,14.962 14.997,15.231 12.892,24.542 12.769,14.997 4.850,13.038 13.003,12.769" fill="#f5f5f7"/>
+    </g>
+    <path d="M 3.777 20.828 A 12.3 4.55 -33.0 0 1 10.110 11.154" fill="none" stroke="#f5f5f7" stroke-width="0.95"/>
+    <circle cx="4.676" cy="16.425" r="1.1" fill="#f5f5f7"/>
+  </g>
+</svg>

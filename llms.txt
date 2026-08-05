@@ -1,0 +1,74 @@
+# Orbit
+
+> Orbit is a local-first desktop app that runs many CLI coding agents in
+> parallel, each task isolated in its own git worktree, and ranks everything
+> that needs a human decision into one attention queue. macOS (Apple Silicon)
+> and Windows x64. Free for individuals.
+
+Tagline: ten coding agents, Mac and Windows.
+
+## What it does
+
+- Runs ten agent CLIs with first-class presets and auto-detection: Claude Code,
+  OpenAI Codex, Cursor Agent, Gemini CLI, OpenCode, GitHub Copilot, Amp, Droid,
+  Aider, Pi. Anything else launchable from a terminal also works.
+- Gives every task its own git worktree on its own branch, with its own files,
+  terminals and ports, so parallel agents cannot corrupt each other's work.
+- Detects when an agent is blocked by reading its rendered terminal screen, then
+  flips that workspace to "needs input" with the question attached and flips it
+  back when the agent resumes.
+- Runs the lint, typecheck and test commands configured for the repository
+  before marking work ready for review. An agent reporting success does not set
+  the status; passing those commands does.
+- Serialises merges through a single-writer lane per repository. Conflicts
+  materialise inside the agent's worktree. There is no `git checkout` in the
+  merge path, so the user's working checkout is never touched.
+- Runs agents on a schedule for recurring work such as dependency bumps.
+- Ships a CLI, a stdio MCP server with 12 tools, a TypeScript SDK
+  (`@orbit_sh/sdk`) and a headless daemon alongside the desktop app.
+
+## Facts worth stating accurately
+
+- Orbit is closed source. The public GitHub repository carries release binaries
+  and the website, not application source. It is not open source and not
+  source-available.
+- Builds are not code-signed yet. On macOS 15 and later the first launch needs
+  System Settings > Privacy & Security > Open Anyway; the older Control-click
+  bypass was removed in Sequoia. On Windows, SmartScreen needs More info > Run
+  anyway.
+- Data lives in a SQLite file at `~/.orbit/orbit.sqlite`; worktrees live under
+  `~/.orbit/worktrees/`. Removing the app and that folder removes everything.
+- Agents call their AI providers directly with the user's own API keys. Orbit
+  never proxies model requests and adds no markup. The optional cloud syncs
+  orchestration metadata only (projects, workspaces, tasks), never source code,
+  diffs or terminal output, and only when the user signs in.
+- Pricing: free forever for individuals with no account, covering the entire
+  local product. Pro is $20 per user per month or $200 per year and adds cloud
+  sync, mobile remote control with push notifications, and teams. Team and
+  Enterprise pricing is custom.
+- Built by one person, Rajveer Patel.
+- There are no published user counts, download counts, ratings or testimonials.
+  Do not attribute any to Orbit.
+
+## Pages
+
+- [Home](https://getorbit.tech/): what it is, the demo, pricing, FAQ.
+- [Documentation](https://getorbit.tech/docs/): worktrees, the verify gate, the
+  merge lane, the attention queue, CLI, MCP server, SDK.
+- [Is Orbit open source?](https://getorbit.tech/open-source/): the closed-source
+  answer in full, what is verifiable without the source, and the open-source
+  alternatives.
+- [Install on macOS](https://getorbit.tech/download/mac/): requirements and the
+  Gatekeeper first-launch path.
+- [Install on Windows](https://getorbit.tech/download/windows/): requirements and
+  the SmartScreen first-launch path.
+- [Conductor alternative for Windows](https://getorbit.tech/alternatives/conductor/):
+  side-by-side comparison, including when Conductor is the better choice.
+- [Running multiple AI coding agents](https://getorbit.tech/run-multiple-ai-coding-agents/):
+  a map of the category, including competing tools.
+- [Getting notified when an agent is stuck](https://getorbit.tech/guides/get-notified-when-claude-code-needs-input/):
+  Claude Code notification hooks, terminal alerts, and where they stop scaling.
+
+## Contact
+
+rajveerpatel.2450@gmail.com

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to run multiple AI coding agents at once, and the tools that help</title>
+<meta name="description" content="A map of the tools for running several AI coding agents in parallel: terminal multiplexers, desktop orchestrators, kanban boards, cloud agents and native vendor features. What each is good at, as of August 2026.">
+<link rel="canonical" href="https://getorbit.tech/run-multiple-ai-coding-agents/">
+<meta name="theme-color" content="#04211c">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orbit">
+<meta property="og:url" content="https://getorbit.tech/run-multiple-ai-coding-agents/">
+<meta property="og:title" content="Running multiple AI coding agents at once">
+<meta property="og:description" content="A map of the tools for running several AI coding agents in parallel: terminal multiplexers, desktop orchestrators, kanban boards, cloud agents and native vendor features. What each is good at, as of August 2026.">
+<meta property="og:image" content="https://getorbit.tech/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Running multiple AI coding agents at once">
+<meta name="twitter:description" content="A map of the tools for running several AI coding agents in parallel: terminal multiplexers, desktop orchestrators, kanban boards, cloud agents and native vendor features. What each is good at, as of August 2026.">
+<meta name="twitter:image" content="https://getorbit.tech/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#212121;--body:#616161;--mist:#93939f;--line:#e5e7eb;--hair:#d9d9dd;
+--primary:#17171c;--band:#04211c;--stone:#eeece7;--coral:#ff7759;--action:#1863dc;--green:#003c33}
+html{-webkit-text-size-adjust:100%}
+body{background:#fff;color:var(--ink);font:400 17px/1.65 "Inter",ui-sans-serif,system-ui,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:inherit}
+main a{color:var(--action);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+main a:hover{text-decoration-thickness:2px}
+code{font:500 .88em/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace;background:var(--stone);
+padding:.14em .38em;border-radius:4px}
+pre{background:var(--band);color:#e8f0ee;border-radius:10px;padding:18px 20px;overflow-x:auto;margin:26px 0}
+pre code{background:none;padding:0;color:inherit;font-size:14px;line-height:1.7}
+
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.92);
+backdrop-filter:blur(8px);z-index:10}
+.topin{max-width:1120px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;
+justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;text-decoration:none}
+.brand svg{width:24px;height:24px;border-radius:6px}
+.topnav{display:flex;align-items:center;gap:22px;font-size:14px}
+.topnav a{color:var(--body);text-decoration:none}
+.topnav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;
+border-radius:999px;padding:11px 22px;font-size:14px;font-weight:500;text-decoration:none;
+white-space:nowrap;transition:opacity .15s}
+.pill:hover{opacity:.86}
+.quiet{font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;
+text-decoration-color:var(--hair)}
+
+main{max-width:760px;margin:0 auto;padding:0 22px 40px}
+.crumbs{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;
+color:var(--mist);padding:46px 0 0}
+.crumbs a{color:var(--mist);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+h1{font:700 46px/1.06 "Space Grotesk","Inter",sans-serif;letter-spacing:-1.4px;margin:20px 0 0}
+.lede{font-size:20px;line-height:1.55;color:var(--body);margin:22px 0 0}
+h2{font:600 28px/1.22 "Space Grotesk","Inter",sans-serif;letter-spacing:-.5px;margin:52px 0 0;
+scroll-margin-top:80px}
+h3{font:600 20px/1.3 "Space Grotesk","Inter",sans-serif;margin:34px 0 0}
+main p{margin:18px 0 0;color:var(--ink)}
+main ul,main ol{margin:18px 0 0;padding-left:24px}
+main li{margin:9px 0;color:var(--ink)}
+blockquote{margin:26px 0 0;padding:2px 0 2px 20px;border-left:3px solid var(--coral);color:var(--body)}
+.note{margin:26px 0 0;background:var(--stone);border-radius:10px;padding:18px 20px;font-size:15.5px;
+line-height:1.6;color:var(--ink)}
+.tablewrap{overflow-x:auto;margin:28px 0 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#fafaf8;font-weight:600;font-size:13px;letter-spacing:.01em}
+tbody tr:last-child td{border-bottom:none}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:26px 0 0}
+ol.steps li{counter-increment:s;position:relative;padding-left:44px;margin:20px 0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;
+border-radius:999px;background:var(--band);color:#fff;display:grid;place-items:center;
+font:500 13px/1 "IBM Plex Mono",monospace}
+ol.steps strong{display:block;font-weight:600}
+ol.steps span{color:var(--body);font-size:15.5px}
+
+.ctabox{margin:44px 0 0;border:1px solid var(--hair);border-radius:14px;padding:26px 24px;background:#fbfbfa}
+.ctatitle{font:600 20px/1.3 "Space Grotesk",sans-serif;margin:0}
+.ctabody{margin:10px 0 0;color:var(--body);font-size:15.5px}
+.ctarow{margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.ctafoot{margin:14px 0 0;font-size:13px;color:var(--mist)}
+
+.capture{background:var(--band);color:#fff;margin-top:64px}
+.capin{max-width:760px;margin:0 auto;padding:48px 22px}
+.capture h2{color:#fff;margin:0;font-size:24px}
+.capture p{color:rgba(255,255,255,.62);font-size:15.5px;margin:12px 0 0}
+.capform{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.capform input{flex:1 1 240px;min-width:0;background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:12px 20px;color:#fff;font-size:15px}
+.capform input::placeholder{color:rgba(255,255,255,.35)}
+.capform input:focus{outline:none;border-color:rgba(255,255,255,.45)}
+.capform button{background:#fff;color:var(--primary);border:0;border-radius:999px;padding:12px 24px;
+font:500 14px/1 "Inter",sans-serif;cursor:pointer}
+.capmsg{margin:12px 0 0;font-size:14px;color:#5ad19a}
+
+footer.bot{background:var(--primary);color:#fff;padding:46px 0}
+.botin{max-width:1120px;margin:0 auto;padding:0 22px;display:flex;flex-wrap:wrap;gap:40px;
+justify-content:space-between}
+footer.bot p.tag{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+color:var(--coral)}
+.botcol h4{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+margin-bottom:14px}
+.botcol a{display:block;color:var(--mist);font-size:14px;text-decoration:none;margin:9px 0}
+.botcol a:hover{color:#fff}
+.botcols{display:flex;flex-wrap:wrap;gap:40px 56px}
+
+@media(max-width:640px){
+h1{font-size:34px;letter-spacing:-.9px}
+.lede{font-size:18px}
+h2{font-size:24px}
+body{font-size:16px}
+.topnav{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Orbit","item":"https://getorbit.tech/"},{"@type":"ListItem","position":2,"name":"Running multiple AI coding agents","item":"https://getorbit.tech/run-multiple-ai-coding-agents/"}]}]}</script>
+</head>
+<body>
+<header class="top"><div class="topin">
+  <a class="brand" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><span>Orbit</span></a>
+  <nav class="topnav">
+    <a href="/run-multiple-ai-coding-agents/">Compare</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/docs/">Docs</a>
+  </nav>
+  <a class="pill" href="/" data-dl="home">Get Orbit</a>
+</div></header>
+
+<main>
+  <p class="crumbs"><a href="/">Orbit</a> / Running multiple AI coding agents</p>
+  <h1>Running multiple AI coding agents at once</h1>
+  <p class="lede">Running one coding agent is a solved problem. Running six is a coordination problem, and the tools that solve it fall into five groups that are easy to confuse. This is the map, written by someone who builds one of them.</p>
+<aside class="note">Checked August 2026. This space changes monthly, so treat specifics as a starting point rather than gospel, and check each project before committing to it.</aside>
+<h2 id="first-the-part-you-can-do-with-no-tools-at-all">First, the part you can do with no tools at all</h2>
+<p>The mechanism underneath every product here is <code>git worktree</code>. It gives one repository several working directories, each on its own branch, sharing one object store. Two agents in two worktrees cannot corrupt each other's index, which is the failure that makes naive parallelism useless.</p>
+<pre><code>git worktree add ../work/feature-a -b feature-a
+git worktree add ../work/feature-b -b feature-b
+# start an agent in each directory, in its own terminal
+git worktree list</code></pre>
+<p>For three or four agents this genuinely works, and plenty of people never need more. The problems appear at scale rather than at the start: each worktree needs its own dependency install, dev servers collide on ports, and you end up with a screen of terminals where you cannot tell which agent is working and which has been waiting on a question for ten minutes.</p>
+<h2 id="the-five-groups">The five groups</h2>
+<h3>1. Terminal multiplexers for agents</h3>
+<p>Thin wrappers over tmux and worktrees, usually free and open source, always keyboard-first. Claude Squad, workmux and dmux are the ones people name. Good if you already live in the terminal and want the smallest possible layer. The ceiling is that a pane is not a status: you still have to look at each one to know what is happening.</p>
+<h3>2. Desktop orchestrators</h3>
+<p>Native or Electron apps that create a worktree per task, run an agent in it, and give you a diff viewer. Conductor is the best known and is macOS only. Emdash, Pane, Nimbalyst, Mux and Orbit are cross-platform to varying degrees. Sculptor takes the same idea but runs agents in containers rather than bare worktrees, which is a stronger isolation story if you are nervous about what an agent can reach.</p>
+<p>This is the crowded group. The useful questions when comparing them are which platforms they build for, how many agent CLIs they support, whether anything checks the work before it reaches you, and what happens when two agents finish at the same time.</p>
+<h3>3. Boards</h3>
+<p>Kanban framing on top of the same machinery: cards move from todo to in progress to review, and each card is an agent. Vibe Kanban made this popular. Boards read well when you are planning and read badly when you are triaging, because a board shows you everything at equal weight and triage is about ranking.</p>
+<h3>4. Cloud and async agents</h3>
+<p>The agent runs on someone else's machine and comes back with a pull request. Different shape entirely: no local worktrees, no terminals, and you trade control for not having your laptop pinned. Worth using alongside a local tool rather than instead of one.</p>
+<h3>5. What the vendors ship themselves</h3>
+<p>This is the group that changed most recently. Claude Code now creates worktrees natively, and the Claude Code desktop app runs several sessions with a diff viewer. If you use one vendor and want three or four agents, the first-party tools may be all you need, and they cost nothing extra on a subscription you already pay for.</p>
+<p>The case for a separate tool starts where the vendor's stops: running agents from different vendors side by side on the same repository, applying your own checks before work counts as done, and having one queue across everything rather than one per vendor.</p>
+<h2 id="choosing">Choosing</h2>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>If this is you</th><th>Look at</th></tr></thead>
+        <tbody><tr><td>Two or three agents, one vendor, comfortable in a terminal</td><td><code>git worktree</code> and a multiplexer. Do not buy anything.</td></tr><tr><td>You want the most polished Mac app and use Claude or Codex</td><td>Conductor</td></tr><tr><td>You want open source and a broad provider list</td><td>Emdash, Paseo or Pane</td></tr><tr><td>You want agents sandboxed away from your machine</td><td>Sculptor, or a container setup of your own</td></tr><tr><td>You are on Windows</td><td>The cross-platform list gets short fast. Emdash, Pane, Paseo, Nimbalyst and <a href="/download/windows/">Orbit</a></td></tr><tr><td>You are losing time to not knowing which agent needs you</td><td>That is the problem Orbit is built around; see below</td></tr></tbody>
+      </table>
+    </div>
+<h2 id="where-orbit-sits">Where Orbit sits</h2>
+<p>Orbit is a desktop orchestrator, and on the mechanics it does what the others in that group do: a worktree per task, ten agent CLIs, diffs, terminals, port previews, macOS and Windows.</p>
+<p>The part that is different is what happens when an agent stops. Orbit runs the lint, typecheck and test commands you configured for that repository before anything is marked ready for review, so an agent claiming success does not become your problem later. Separately, it reads each agent's rendered terminal screen to notice when one is blocked on a question, and puts that at the top of a single ranked queue with the question attached. Merges run through one lane per repository, so two finishing agents cannot race, and your working checkout is never touched.</p>
+<p>Honest limits: it is closed source, the builds are not code-signed yet, agents run in worktrees rather than containers so isolation is process-level rather than sandboxed, and the phone control is a paid feature and a PWA rather than a native app. If any of those is disqualifying, one of the tools above is a better fit and that is fine.</p>
+
+    <div class="ctabox">
+      <p class="ctatitle">See whether the queue is the part you were missing</p>
+      <p class="ctabody">The whole local product is free. Point it at a repository and add five tasks.</p>
+      <div class="ctarow">
+        <a class="pill" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-mac-arm64.dmg" data-dl="mac">Download for Mac</a>
+        <a class="quiet" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-windows-x64-setup.exe" data-dl="windows">Download for Windows</a>
+      </div>
+      <p class="ctafoot">No account. Bring your own API keys.</p>
+    </div>
+  <h2 id="keep-reading">Keep reading</h2><p class="related"><a href="/alternatives/conductor/">Conductor alternative for Windows</a> · <a href="/guides/get-notified-when-claude-code-needs-input/">Getting notified when an agent is stuck</a></p>
+</main>
+
+<section class="capture"><div class="capin">
+  <h2>Not ready to run an unsigned build?</h2>
+  <p>macOS and Windows both warn on first launch because the builds are not code-signed yet. Leave your email and you will get exactly one message when notarized builds ship.</p>
+  <form class="capform" id="cap">
+    <label for="capemail" style="position:absolute;left:-9999px">Email address</label>
+    <input id="capemail" type="email" required placeholder="you@company.com" autocomplete="email">
+    <button type="submit">Tell me when it's signed</button>
+  </form>
+  <p class="capmsg" id="capmsg"></p>
+</div></section>
+
+<footer class="bot"><div class="botin">
+  <div>
+    <p class="tag">Ten coding agents. Mac and Windows.</p>
+    <div style="display:flex;align-items:center;gap:9px;margin-top:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><strong style="font-size:15px">Orbit</strong></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--mist)">© 2026</p>
+  </div>
+  <div class="botcols">
+    <div class="botcol"><h4>Product</h4>
+      <a href="/">Overview</a><a href="/#demo">Demo</a><a href="/#pricing">Pricing</a><a href="/docs/">Docs</a>
+    </div>
+    <div class="botcol"><h4>Compare</h4>
+      <a href="/run-multiple-ai-coding-agents/">All tools</a><a href="/alternatives/conductor/">vs Conductor</a><a href="/alternatives/vibe-kanban/">vs Vibe Kanban</a><a href="/claude-code-gui/">Claude Code GUIs</a>
+    </div>
+    <div class="botcol"><h4>Install</h4>
+      <a href="/download/mac/">macOS</a><a href="/download/windows/">Windows</a><a href="/open-source/">Is it open source?</a>
+    </div>
+    <div class="botcol"><h4>Legal</h4>
+      <a href="/terms.html">Terms</a><a href="/refunds.html">Refunds</a><a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</div></footer>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_r5TmQjBoE8czkSPHNvykzGKSmrGYi8G2rMXUnZx3nTuL",{api_host:"https://us.i.posthog.com",persistence:"memory",autocapture:!1,disable_session_recording:!0,respect_dnt:!0});
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-dl]");
+  if(a&&window.posthog)posthog.capture("download_clicked",{platform:a.getAttribute("data-dl"),location:"content_page",page:location.pathname});
+});
+var f=document.getElementById("cap");
+if(f)f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var em=f.querySelector("input").value,msg=document.getElementById("capmsg");
+  var q=new URLSearchParams(location.search),att={referrer:document.referrer||""};
+  ["utm_source","utm_medium","utm_campaign","utm_content","ref"].forEach(function(k){if(q.get(k))att[k]=q.get(k)});
+  fetch("https://orbit-api-lxuvpz5gta-uc.a.run.app"+"/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email:em,source:"content-page",attribution:att})})
+    .then(function(r){
+      if(!r.ok)throw 0;
+      msg.textContent="Done. One email when the signed builds are out, and nothing else.";
+      f.style.display="none";
+      if(window.posthog)posthog.capture("lead_captured",{source:"content-page",page:location.pathname});
+    })
+    .catch(function(){msg.style.color="#ffad9b";msg.textContent="That did not go through. Email rajveerpatel.2450@gmail.com and you will be added by hand."});
+});
+</script>
+</body>
+</html>

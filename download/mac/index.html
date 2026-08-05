@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orbit for macOS · Run parallel AI coding agents on Apple Silicon</title>
+<meta name="description" content="Download Orbit for macOS on Apple Silicon. Run Claude Code, Codex, Cursor Agent and more in parallel, each task in its own git worktree. Includes the Gatekeeper first-launch step.">
+<link rel="canonical" href="https://getorbit.tech/download/mac/">
+<meta name="theme-color" content="#04211c">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orbit">
+<meta property="og:url" content="https://getorbit.tech/download/mac/">
+<meta property="og:title" content="Orbit for macOS">
+<meta property="og:description" content="Download Orbit for macOS on Apple Silicon. Run Claude Code, Codex, Cursor Agent and more in parallel, each task in its own git worktree. Includes the Gatekeeper first-launch step.">
+<meta property="og:image" content="https://getorbit.tech/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orbit for macOS">
+<meta name="twitter:description" content="Download Orbit for macOS on Apple Silicon. Run Claude Code, Codex, Cursor Agent and more in parallel, each task in its own git worktree. Includes the Gatekeeper first-launch step.">
+<meta name="twitter:image" content="https://getorbit.tech/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#212121;--body:#616161;--mist:#93939f;--line:#e5e7eb;--hair:#d9d9dd;
+--primary:#17171c;--band:#04211c;--stone:#eeece7;--coral:#ff7759;--action:#1863dc;--green:#003c33}
+html{-webkit-text-size-adjust:100%}
+body{background:#fff;color:var(--ink);font:400 17px/1.65 "Inter",ui-sans-serif,system-ui,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:inherit}
+main a{color:var(--action);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+main a:hover{text-decoration-thickness:2px}
+code{font:500 .88em/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace;background:var(--stone);
+padding:.14em .38em;border-radius:4px}
+pre{background:var(--band);color:#e8f0ee;border-radius:10px;padding:18px 20px;overflow-x:auto;margin:26px 0}
+pre code{background:none;padding:0;color:inherit;font-size:14px;line-height:1.7}
+
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.92);
+backdrop-filter:blur(8px);z-index:10}
+.topin{max-width:1120px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;
+justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;text-decoration:none}
+.brand svg{width:24px;height:24px;border-radius:6px}
+.topnav{display:flex;align-items:center;gap:22px;font-size:14px}
+.topnav a{color:var(--body);text-decoration:none}
+.topnav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;
+border-radius:999px;padding:11px 22px;font-size:14px;font-weight:500;text-decoration:none;
+white-space:nowrap;transition:opacity .15s}
+.pill:hover{opacity:.86}
+.quiet{font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;
+text-decoration-color:var(--hair)}
+
+main{max-width:760px;margin:0 auto;padding:0 22px 40px}
+.crumbs{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;
+color:var(--mist);padding:46px 0 0}
+.crumbs a{color:var(--mist);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+h1{font:700 46px/1.06 "Space Grotesk","Inter",sans-serif;letter-spacing:-1.4px;margin:20px 0 0}
+.lede{font-size:20px;line-height:1.55;color:var(--body);margin:22px 0 0}
+h2{font:600 28px/1.22 "Space Grotesk","Inter",sans-serif;letter-spacing:-.5px;margin:52px 0 0;
+scroll-margin-top:80px}
+h3{font:600 20px/1.3 "Space Grotesk","Inter",sans-serif;margin:34px 0 0}
+main p{margin:18px 0 0;color:var(--ink)}
+main ul,main ol{margin:18px 0 0;padding-left:24px}
+main li{margin:9px 0;color:var(--ink)}
+blockquote{margin:26px 0 0;padding:2px 0 2px 20px;border-left:3px solid var(--coral);color:var(--body)}
+.note{margin:26px 0 0;background:var(--stone);border-radius:10px;padding:18px 20px;font-size:15.5px;
+line-height:1.6;color:var(--ink)}
+.tablewrap{overflow-x:auto;margin:28px 0 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#fafaf8;font-weight:600;font-size:13px;letter-spacing:.01em}
+tbody tr:last-child td{border-bottom:none}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:26px 0 0}
+ol.steps li{counter-increment:s;position:relative;padding-left:44px;margin:20px 0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;
+border-radius:999px;background:var(--band);color:#fff;display:grid;place-items:center;
+font:500 13px/1 "IBM Plex Mono",monospace}
+ol.steps strong{display:block;font-weight:600}
+ol.steps span{color:var(--body);font-size:15.5px}
+
+.ctabox{margin:44px 0 0;border:1px solid var(--hair);border-radius:14px;padding:26px 24px;background:#fbfbfa}
+.ctatitle{font:600 20px/1.3 "Space Grotesk",sans-serif;margin:0}
+.ctabody{margin:10px 0 0;color:var(--body);font-size:15.5px}
+.ctarow{margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.ctafoot{margin:14px 0 0;font-size:13px;color:var(--mist)}
+
+.capture{background:var(--band);color:#fff;margin-top:64px}
+.capin{max-width:760px;margin:0 auto;padding:48px 22px}
+.capture h2{color:#fff;margin:0;font-size:24px}
+.capture p{color:rgba(255,255,255,.62);font-size:15.5px;margin:12px 0 0}
+.capform{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.capform input{flex:1 1 240px;min-width:0;background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:12px 20px;color:#fff;font-size:15px}
+.capform input::placeholder{color:rgba(255,255,255,.35)}
+.capform input:focus{outline:none;border-color:rgba(255,255,255,.45)}
+.capform button{background:#fff;color:var(--primary);border:0;border-radius:999px;padding:12px 24px;
+font:500 14px/1 "Inter",sans-serif;cursor:pointer}
+.capmsg{margin:12px 0 0;font-size:14px;color:#5ad19a}
+
+footer.bot{background:var(--primary);color:#fff;padding:46px 0}
+.botin{max-width:1120px;margin:0 auto;padding:0 22px;display:flex;flex-wrap:wrap;gap:40px;
+justify-content:space-between}
+footer.bot p.tag{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+color:var(--coral)}
+.botcol h4{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+margin-bottom:14px}
+.botcol a{display:block;color:var(--mist);font-size:14px;text-decoration:none;margin:9px 0}
+.botcol a:hover{color:#fff}
+.botcols{display:flex;flex-wrap:wrap;gap:40px 56px}
+
+@media(max-width:640px){
+h1{font-size:34px;letter-spacing:-.9px}
+.lede{font-size:18px}
+h2{font-size:24px}
+body{font-size:16px}
+.topnav{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Orbit","item":"https://getorbit.tech/"},{"@type":"ListItem","position":2,"name":"Download for macOS","item":"https://getorbit.tech/download/mac/"}]},{"@type":"SoftwareApplication","name":"Orbit for macOS","applicationCategory":"DeveloperApplication","operatingSystem":"macOS 12 or later, Apple Silicon","url":"https://getorbit.tech/download/mac/","downloadUrl":"https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-mac-arm64.dmg","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}</script>
+</head>
+<body>
+<header class="top"><div class="topin">
+  <a class="brand" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><span>Orbit</span></a>
+  <nav class="topnav">
+    <a href="/run-multiple-ai-coding-agents/">Compare</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/docs/">Docs</a>
+  </nav>
+  <a class="pill" href="/" data-dl="home">Get Orbit</a>
+</div></header>
+
+<main>
+  <p class="crumbs"><a href="/">Orbit</a> / Download for macOS</p>
+  <h1>Orbit for macOS</h1>
+  <p class="lede">Orbit runs your task list as parallel work. Each task gets an AI coding agent in its own git worktree, and one queue shows you only what needs a human. The whole local product is free.</p>
+
+    <div class="ctabox">
+      <p class="ctatitle">Download Orbit for macOS</p>
+      <p class="ctabody">Apple Silicon (M1 and later), macOS 12 or later. Roughly 120 MB, delivered as a .dmg.</p>
+      <div class="ctarow">
+        <a class="pill" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-mac-arm64.dmg" data-dl="mac">Download the .dmg</a>
+        <a class="quiet" href="/download/windows/" data-dl="windows_crosslink">Windows build</a>
+      </div>
+      <p class="ctafoot">Free forever for individuals. Bring your own API keys.</p>
+    </div>
+<h2 id="the-one-line-install-with-no-gatekeeper-prompt">The one-line install, with no Gatekeeper prompt</h2>
+<p>Orbit is signed but not notarized, because notarization needs a paid Apple Developer account. So macOS marks the download as quarantined and asks for one confirmation the first time. The install script does the whole thing in one step, including clearing that flag, so no dialog appears at all:</p>
+<pre><code>curl -fsSL https://getorbit.tech/install.sh | bash</code></pre>
+<p>It downloads the current release, copies ORBIT.app to Applications, removes the quarantine attribute, and cleans up after itself. Nothing else on your machine is touched. Piping a script into bash deserves a look first, which is why it is short and commented: read it at <a href="https://getorbit.tech/install.sh">getorbit.tech/install.sh</a>.</p>
+<h2 id="prefer-the-dmg-first-launch-on-macos-15-and-later">Prefer the .dmg? First launch on macOS 15 and later</h2>
+<p>Downloading by hand means macOS quarantines the app and blocks the first launch. Older guides tell you to right-click and choose Open. That stopped working in macOS 15 Sequoia. Here is the path that does work now.</p>
+
+    <ol class="steps"><li><strong>Open Orbit normally and let it get blocked</strong><span>Double-click it in Applications. macOS refuses and says it cannot verify the developer. That refusal is the step that registers the app with the system, so it has to happen first.</span></li><li><strong>Go to System Settings, then Privacy &amp; Security</strong><span>Scroll down to the Security section. There is a line naming ORBIT and a button next to it.</span></li><li><strong>Click Open Anyway and authenticate</strong><span>Touch ID or your password. Then open Orbit again and confirm once more. macOS remembers after that and every later launch is normal.</span></li></ol>
+<aside class="note">If an older download says the app <strong>is damaged and can't be opened</strong>, it is not a corrupt file. Builds before v1.1.4 shipped a broken signature and macOS reports that as damage. Install v1.1.5 or later, or clear the flag on the copy you have: <code>xattr -dr com.apple.quarantine /Applications/ORBIT.app</code></aside>
+<p>Notarization needs a paid Apple Developer account and a signing identity. It is on the list and it is not done yet. Until then you are running an unsigned binary from a solo developer, which is a real thing to weigh rather than a formality to click through.</p>
+<p>Would rather not? Leave your email at the bottom of the page. You will get one message when notarized builds ship and nothing else.</p>
+<h2 id="install">Install</h2>
+
+    <ol class="steps"><li><strong>Open the .dmg and drag Orbit to Applications</strong><span>On the first launch macOS blocks it; use the Privacy &amp; Security path above to allow it once.</span></li><li><strong>Add a project</strong><span>Pick a folder that is already a git repository. Orbit does not modify your working checkout; it creates worktrees under ~/.orbit/worktrees instead.</span></li><li><strong>Let it detect your agents</strong><span>Claude Code, OpenAI Codex, Cursor Agent, Gemini CLI, OpenCode, GitHub Copilot, Amp, Droid, Aider and Pi all have first-class presets and are found automatically if they are on your PATH. Anything else that runs in a terminal can be added by hand.</span></li><li><strong>Set your verify commands</strong><span>Give Orbit the lint, typecheck and test commands for the repo. An agent saying it finished does not mark work ready for review; passing your commands does.</span></li></ol>
+<h2 id="requirements">Requirements</h2>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>Needed</th></tr></thead>
+        <tbody><tr><td>Chip</td><td>Apple Silicon. There is no Intel build.</td></tr><tr><td>macOS</td><td>12 Monterey or later</td></tr><tr><td>Git</td><td>Any recent version on your PATH. Orbit drives <code>git worktree</code> directly.</td></tr><tr><td>Agent CLIs</td><td>Whichever you already use. Orbit runs them rather than replacing them.</td></tr><tr><td>API keys</td><td>Yours. Agents call their providers directly, at zero markup, and Orbit never proxies a request.</td></tr><tr><td>An account</td><td>Only for Pro. The free local product needs no sign-in.</td></tr></tbody>
+      </table>
+    </div>
+<h2 id="where-your-data-lives">Where your data lives</h2>
+<p>Everything Orbit knows sits in one SQLite file at <code>~/.orbit/orbit.sqlite</code>, with worktrees under <code>~/.orbit/worktrees/&lt;project&gt;/&lt;branch&gt;</code>. You can open that database with any SQLite client and read every row. Uninstalling is dragging the app to the trash and deleting <code>~/.orbit</code>.</p>
+<p>The optional cloud syncs orchestration metadata only: project names, workspace status, tasks. Source code, diffs and terminal output never go to it. If you never sign in, nothing leaves the machine at all.</p>
+<h2 id="open-a-worktree-in-the-editor-you-already-use">Open a worktree in the editor you already use</h2>
+<p>Orbit is not trying to replace your editor. Any workspace opens in VS Code, Cursor, Windsurf, Zed, Xcode, a JetBrains IDE, Sublime Text or a terminal with one click. Review diffs and merge in Orbit, or do that part wherever you prefer.</p>
+
+    <div class="ctabox">
+      <p class="ctatitle">Run your whole list at once</p>
+      <p class="ctabody">Ten tasks, ten agents, one queue for the parts that need you.</p>
+      <div class="ctarow">
+        <a class="pill" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-mac-arm64.dmg" data-dl="mac">Download for macOS</a>
+        <a class="quiet" href="/docs/" data-dl="docs_crosslink">Read the docs first</a>
+      </div>
+      <p class="ctafoot">First launch needs one trip to System Settings, Privacy &amp; Security, Open Anyway.</p>
+    </div>
+  <h2 id="keep-reading">Keep reading</h2><p class="related"><a href="/download/windows/">Orbit for Windows</a> · <a href="/open-source/">Is Orbit open source?</a></p>
+</main>
+
+<section class="capture"><div class="capin">
+  <h2>Not ready to run an unsigned build?</h2>
+  <p>macOS and Windows both warn on first launch because the builds are not code-signed yet. Leave your email and you will get exactly one message when notarized builds ship.</p>
+  <form class="capform" id="cap">
+    <label for="capemail" style="position:absolute;left:-9999px">Email address</label>
+    <input id="capemail" type="email" required placeholder="you@company.com" autocomplete="email">
+    <button type="submit">Tell me when it's signed</button>
+  </form>
+  <p class="capmsg" id="capmsg"></p>
+</div></section>
+
+<footer class="bot"><div class="botin">
+  <div>
+    <p class="tag">Ten coding agents. Mac and Windows.</p>
+    <div style="display:flex;align-items:center;gap:9px;margin-top:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><strong style="font-size:15px">Orbit</strong></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--mist)">© 2026</p>
+  </div>
+  <div class="botcols">
+    <div class="botcol"><h4>Product</h4>
+      <a href="/">Overview</a><a href="/#demo">Demo</a><a href="/#pricing">Pricing</a><a href="/docs/">Docs</a>
+    </div>
+    <div class="botcol"><h4>Compare</h4>
+      <a href="/run-multiple-ai-coding-agents/">All tools</a><a href="/alternatives/conductor/">vs Conductor</a><a href="/alternatives/vibe-kanban/">vs Vibe Kanban</a><a href="/claude-code-gui/">Claude Code GUIs</a>
+    </div>
+    <div class="botcol"><h4>Install</h4>
+      <a href="/download/mac/">macOS</a><a href="/download/windows/">Windows</a><a href="/open-source/">Is it open source?</a>
+    </div>
+    <div class="botcol"><h4>Legal</h4>
+      <a href="/terms.html">Terms</a><a href="/refunds.html">Refunds</a><a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</div></footer>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_r5TmQjBoE8czkSPHNvykzGKSmrGYi8G2rMXUnZx3nTuL",{api_host:"https://us.i.posthog.com",persistence:"memory",autocapture:!1,disable_session_recording:!0,respect_dnt:!0});
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-dl]");
+  if(a&&window.posthog)posthog.capture("download_clicked",{platform:a.getAttribute("data-dl"),location:"content_page",page:location.pathname});
+});
+var f=document.getElementById("cap");
+if(f)f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var em=f.querySelector("input").value,msg=document.getElementById("capmsg");
+  var q=new URLSearchParams(location.search),att={referrer:document.referrer||""};
+  ["utm_source","utm_medium","utm_campaign","utm_content","ref"].forEach(function(k){if(q.get(k))att[k]=q.get(k)});
+  fetch("https://orbit-api-lxuvpz5gta-uc.a.run.app"+"/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email:em,source:"content-page",attribution:att})})
+    .then(function(r){
+      if(!r.ok)throw 0;
+      msg.textContent="Done. One email when the signed builds are out, and nothing else.";
+      f.style.display="none";
+      if(window.posthog)posthog.capture("lead_captured",{source:"content-page",page:location.pathname});
+    })
+    .catch(function(){msg.style.color="#ffad9b";msg.textContent="That did not go through. Email rajveerpatel.2450@gmail.com and you will be added by hand."});
+});
+</script>
+</body>
+</html>

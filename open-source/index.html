@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Is Orbit open source? No, and here is exactly what that means</title>
+<meta name="description" content="Orbit is closed source. What that means for your code and your data, what you can verify yourself, and the open-source alternatives worth using if closed software is a dealbreaker.">
+<link rel="canonical" href="https://getorbit.tech/open-source/">
+<meta name="theme-color" content="#04211c">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Orbit">
+<meta property="og:url" content="https://getorbit.tech/open-source/">
+<meta property="og:title" content="Is Orbit open source?">
+<meta property="og:description" content="Orbit is closed source. What that means for your code and your data, what you can verify yourself, and the open-source alternatives worth using if closed software is a dealbreaker.">
+<meta property="og:image" content="https://getorbit.tech/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is Orbit open source?">
+<meta name="twitter:description" content="Orbit is closed source. What that means for your code and your data, what you can verify yourself, and the open-source alternatives worth using if closed software is a dealbreaker.">
+<meta name="twitter:image" content="https://getorbit.tech/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#212121;--body:#616161;--mist:#93939f;--line:#e5e7eb;--hair:#d9d9dd;
+--primary:#17171c;--band:#04211c;--stone:#eeece7;--coral:#ff7759;--action:#1863dc;--green:#003c33}
+html{-webkit-text-size-adjust:100%}
+body{background:#fff;color:var(--ink);font:400 17px/1.65 "Inter",ui-sans-serif,system-ui,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:inherit}
+main a{color:var(--action);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+main a:hover{text-decoration-thickness:2px}
+code{font:500 .88em/1.5 "IBM Plex Mono",ui-monospace,Menlo,monospace;background:var(--stone);
+padding:.14em .38em;border-radius:4px}
+pre{background:var(--band);color:#e8f0ee;border-radius:10px;padding:18px 20px;overflow-x:auto;margin:26px 0}
+pre code{background:none;padding:0;color:inherit;font-size:14px;line-height:1.7}
+
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.92);
+backdrop-filter:blur(8px);z-index:10}
+.topin{max-width:1120px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;
+justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;text-decoration:none}
+.brand svg{width:24px;height:24px;border-radius:6px}
+.topnav{display:flex;align-items:center;gap:22px;font-size:14px}
+.topnav a{color:var(--body);text-decoration:none}
+.topnav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;
+border-radius:999px;padding:11px 22px;font-size:14px;font-weight:500;text-decoration:none;
+white-space:nowrap;transition:opacity .15s}
+.pill:hover{opacity:.86}
+.quiet{font-size:14px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;
+text-decoration-color:var(--hair)}
+
+main{max-width:760px;margin:0 auto;padding:0 22px 40px}
+.crumbs{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;
+color:var(--mist);padding:46px 0 0}
+.crumbs a{color:var(--mist);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+h1{font:700 46px/1.06 "Space Grotesk","Inter",sans-serif;letter-spacing:-1.4px;margin:20px 0 0}
+.lede{font-size:20px;line-height:1.55;color:var(--body);margin:22px 0 0}
+h2{font:600 28px/1.22 "Space Grotesk","Inter",sans-serif;letter-spacing:-.5px;margin:52px 0 0;
+scroll-margin-top:80px}
+h3{font:600 20px/1.3 "Space Grotesk","Inter",sans-serif;margin:34px 0 0}
+main p{margin:18px 0 0;color:var(--ink)}
+main ul,main ol{margin:18px 0 0;padding-left:24px}
+main li{margin:9px 0;color:var(--ink)}
+blockquote{margin:26px 0 0;padding:2px 0 2px 20px;border-left:3px solid var(--coral);color:var(--body)}
+.note{margin:26px 0 0;background:var(--stone);border-radius:10px;padding:18px 20px;font-size:15.5px;
+line-height:1.6;color:var(--ink)}
+.tablewrap{overflow-x:auto;margin:28px 0 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#fafaf8;font-weight:600;font-size:13px;letter-spacing:.01em}
+tbody tr:last-child td{border-bottom:none}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:26px 0 0}
+ol.steps li{counter-increment:s;position:relative;padding-left:44px;margin:20px 0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;
+border-radius:999px;background:var(--band);color:#fff;display:grid;place-items:center;
+font:500 13px/1 "IBM Plex Mono",monospace}
+ol.steps strong{display:block;font-weight:600}
+ol.steps span{color:var(--body);font-size:15.5px}
+
+.ctabox{margin:44px 0 0;border:1px solid var(--hair);border-radius:14px;padding:26px 24px;background:#fbfbfa}
+.ctatitle{font:600 20px/1.3 "Space Grotesk",sans-serif;margin:0}
+.ctabody{margin:10px 0 0;color:var(--body);font-size:15.5px}
+.ctarow{margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.ctafoot{margin:14px 0 0;font-size:13px;color:var(--mist)}
+
+.capture{background:var(--band);color:#fff;margin-top:64px}
+.capin{max-width:760px;margin:0 auto;padding:48px 22px}
+.capture h2{color:#fff;margin:0;font-size:24px}
+.capture p{color:rgba(255,255,255,.62);font-size:15.5px;margin:12px 0 0}
+.capform{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:12px}
+.capform input{flex:1 1 240px;min-width:0;background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:12px 20px;color:#fff;font-size:15px}
+.capform input::placeholder{color:rgba(255,255,255,.35)}
+.capform input:focus{outline:none;border-color:rgba(255,255,255,.45)}
+.capform button{background:#fff;color:var(--primary);border:0;border-radius:999px;padding:12px 24px;
+font:500 14px/1 "Inter",sans-serif;cursor:pointer}
+.capmsg{margin:12px 0 0;font-size:14px;color:#5ad19a}
+
+footer.bot{background:var(--primary);color:#fff;padding:46px 0}
+.botin{max-width:1120px;margin:0 auto;padding:0 22px;display:flex;flex-wrap:wrap;gap:40px;
+justify-content:space-between}
+footer.bot p.tag{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+color:var(--coral)}
+.botcol h4{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+margin-bottom:14px}
+.botcol a{display:block;color:var(--mist);font-size:14px;text-decoration:none;margin:9px 0}
+.botcol a:hover{color:#fff}
+.botcols{display:flex;flex-wrap:wrap;gap:40px 56px}
+
+@media(max-width:640px){
+h1{font-size:34px;letter-spacing:-.9px}
+.lede{font-size:18px}
+h2{font-size:24px}
+body{font-size:16px}
+.topnav{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Orbit","item":"https://getorbit.tech/"},{"@type":"ListItem","position":2,"name":"Is Orbit open source?","item":"https://getorbit.tech/open-source/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Orbit open source?","acceptedAnswer":{"@type":"Answer","text":"No. Orbit is closed source. The public GitHub repository carries release binaries and the website, not the source code. Orbit is local-first and free for individuals, but the source is not published."}},{"@type":"Question","name":"Does Orbit send my source code anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Agents call their AI providers directly with your own API keys and Orbit never proxies those requests. Projects, workspaces and tasks live in a SQLite file at ~/.orbit/orbit.sqlite on your machine. The optional cloud syncs orchestration metadata only, and only if you sign in."}}]}]}</script>
+</head>
+<body>
+<header class="top"><div class="topin">
+  <a class="brand" href="/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><span>Orbit</span></a>
+  <nav class="topnav">
+    <a href="/run-multiple-ai-coding-agents/">Compare</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/docs/">Docs</a>
+  </nav>
+  <a class="pill" href="/" data-dl="home">Get Orbit</a>
+</div></header>
+
+<main>
+  <p class="crumbs"><a href="/">Orbit</a> / Is Orbit open source?</p>
+  <h1>Is Orbit open source?</h1>
+  <p class="lede">No. Orbit is closed source. The short version of why, and what you can check for yourself instead.</p>
+<h2 id="what-is-actually-public">What is actually public</h2>
+<p>The public repository at <a href="https://github.com/rajveer2450/orbit" rel="noopener">github.com/rajveer2450/orbit</a> holds release binaries and the website. It does not hold the application source. There is no repository to browse, no license to read, and no build you can reproduce yourself. If a page elsewhere describes Orbit as open source or source-available, that page is wrong.</p>
+<h2 id="why">Why</h2>
+<p>Orbit is built by one person. The free tier is the entire local product with no feature gate and no account, and it is paid for by Pro subscriptions. Publishing the source would make a rebranded free copy a weekend's work, and there would be nothing left to fund the thing. That is a commercial decision, not a technical one, and reasonable people land on the other side of it.</p>
+<p>If that is where you land, the last section of this page has better options for you than arguing about it.</p>
+<h2 id="what-you-can-verify-without-the-source">What you can verify without the source</h2>
+<p>Closed source is not the same as opaque. Most of what people actually want to know about a tool like this is observable from outside:</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Question</th><th>How to check it yourself</th></tr></thead>
+        <tbody><tr><td>Does it send my code anywhere?</td><td>Watch the network. Agents call their providers directly with your keys. Orbit proxies nothing and adds no markup, so the only outbound traffic from a signed-out install is update checks.</td></tr><tr><td>What does it store about me?</td><td>One SQLite file at <code>~/.orbit/orbit.sqlite</code>. Open it in any SQLite client and read every table. Nothing is encrypted or obfuscated.</td></tr><tr><td>What does it do to my repository?</td><td><code>git worktree list</code> shows exactly what it created. Worktrees live under <code>~/.orbit/worktrees/</code>. Your working checkout is never checked out, reset or stashed by Orbit, including during merges.</td></tr><tr><td>What runs on my machine?</td><td>The agent CLIs you already installed, launched as normal child processes in a PTY. <code>ps</code> shows them. Orbit does not bundle or modify them.</td></tr><tr><td>How do I remove it completely?</td><td>Delete the app and delete <code>~/.orbit</code>. There is no other state, no daemon left behind, no login item.</td></tr></tbody>
+      </table>
+    </div>
+<p>The optional cloud, which only exists if you sign in for Pro, syncs orchestration metadata: project names, workspace status, task text. Diffs, file contents and terminal output are not part of that sync.</p>
+<h2 id="the-unsigned-binary-problem-is-separate-and-it-is-real">The unsigned-binary problem is separate, and it is real</h2>
+<p>Right now the builds are not code-signed on either platform, so macOS Gatekeeper and Windows SmartScreen both warn you. That is a genuine trust gap and it is worse than the closed-source question, because it means you cannot easily confirm the binary you downloaded is the one that was built. Signing is on the list. The install pages for <a href="/download/mac/">macOS</a> and <a href="/download/windows/">Windows</a> say exactly what you will see and why.</p>
+<h2 id="if-closed-source-is-a-dealbreaker-use-one-of-these">If closed source is a dealbreaker, use one of these</h2>
+<p>Several open-source projects solve overlapping problems, and if the license matters more to you than the feature set, they are the right answer. Check each project's current activity before committing to it, since this space moves fast.</p>
+<ul><li><strong>Claude Squad</strong> runs multiple Claude Code sessions in tmux panes, terminal-only and keyboard-driven. The closest thing to Orbit's model without a GUI.</li><li><strong>Vibe Kanban</strong> puts agent tasks on a kanban board in the browser, Apache-2.0.</li><li><strong>emdash</strong> is an Electron desktop app for running many agent CLIs in worktrees, and is architecturally the nearest open-source neighbour to Orbit.</li><li><strong>opcode</strong> and similar projects give Claude Code a desktop GUI, including on Windows.</li><li><strong>Crystal</strong> was one of the first GUIs for parallel Claude Code sessions and is worth reading even if you do not run it.</li><li><strong>git worktree</strong> by itself, with a few shell aliases, genuinely covers the first three or four parallel agents. Plenty of people never need more than that.</li></ul>
+<p>Orbit's argument against all of the above is not openness. It is what happens after an agent stops: your own lint, typecheck and test commands decide whether work is ready, blocked agents surface with the question attached instead of sitting silent in a pane, and merges run through one lane so they cannot race. If those do not matter to you, take the open-source option.</p>
+<h2 id="will-it-ever-be-opened">Will it ever be opened?</h2>
+<p>There is no plan and no date, so treat the answer as no. Making promises about a future license to close a sale today would be the kind of thing this page exists to avoid.</p>
+
+    <div class="ctabox">
+      <p class="ctatitle">Still want to try it?</p>
+      <p class="ctabody">Free for individuals, no account, your keys, your machine.</p>
+      <div class="ctarow">
+        <a class="pill" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-mac-arm64.dmg" data-dl="mac">Download for Mac</a>
+        <a class="quiet" href="https://github.com/rajveer2450/orbit/releases/latest/download/ORBIT-windows-x64-setup.exe" data-dl="windows">Download for Windows</a>
+      </div>
+      <p class="ctafoot">Builds are unsigned. Both install pages explain the first-launch step.</p>
+    </div>
+  <h2 id="keep-reading">Keep reading</h2><p class="related"><a href="/download/mac/">Download for macOS</a> · <a href="/download/windows/">Download for Windows</a></p>
+</main>
+
+<section class="capture"><div class="capin">
+  <h2>Not ready to run an unsigned build?</h2>
+  <p>macOS and Windows both warn on first launch because the builds are not code-signed yet. Leave your email and you will get exactly one message when notarized builds ship.</p>
+  <form class="capform" id="cap">
+    <label for="capemail" style="position:absolute;left:-9999px">Email address</label>
+    <input id="capemail" type="email" required placeholder="you@company.com" autocomplete="email">
+    <button type="submit">Tell me when it's signed</button>
+  </form>
+  <p class="capmsg" id="capmsg"></p>
+</div></section>
+
+<footer class="bot"><div class="botin">
+  <div>
+    <p class="tag">Ten coding agents. Mac and Windows.</p>
+    <div style="display:flex;align-items:center;gap:9px;margin-top:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#0a0a0b"/><defs><mask id="m"><rect width="28" height="28" fill="#fff"/><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.47"/><circle cx="4.68" cy="16.43" r="2.3" fill="#000"/></mask></defs><g mask="url(#m)"><ellipse cx="14" cy="14" rx="12.3" ry="4.55" fill="none" stroke="#f5f5f7" stroke-width=".95" transform="rotate(-33 14 14)"/><polygon points="15.11,3.46 15.23,13.00 23.15,14.96 15.00,15.23 12.89,24.54 12.77,15.00 4.85,13.04 13.00,12.77" fill="#f5f5f7"/></g><path d="M 16.48 17.82 L 15.02 18.71 L 13.54 19.51 L 12.07 20.21 L 10.64 20.79 L 9.27 21.23 L 7.99 21.53 L 6.83 21.69 L 5.81 21.69 L 4.96 21.55 L 4.27 21.26" fill="none" stroke="#f5f5f7" stroke-width=".95" stroke-linecap="round"/><circle cx="4.68" cy="16.43" r="1.1" fill="#f5f5f7"/></svg><strong style="font-size:15px">Orbit</strong></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--mist)">© 2026</p>
+  </div>
+  <div class="botcols">
+    <div class="botcol"><h4>Product</h4>
+      <a href="/">Overview</a><a href="/#demo">Demo</a><a href="/#pricing">Pricing</a><a href="/docs/">Docs</a>
+    </div>
+    <div class="botcol"><h4>Compare</h4>
+      <a href="/run-multiple-ai-coding-agents/">All tools</a><a href="/alternatives/conductor/">vs Conductor</a><a href="/alternatives/vibe-kanban/">vs Vibe Kanban</a><a href="/claude-code-gui/">Claude Code GUIs</a>
+    </div>
+    <div class="botcol"><h4>Install</h4>
+      <a href="/download/mac/">macOS</a><a href="/download/windows/">Windows</a><a href="/open-source/">Is it open source?</a>
+    </div>
+    <div class="botcol"><h4>Legal</h4>
+      <a href="/terms.html">Terms</a><a href="/refunds.html">Refunds</a><a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</div></footer>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_r5TmQjBoE8czkSPHNvykzGKSmrGYi8G2rMXUnZx3nTuL",{api_host:"https://us.i.posthog.com",persistence:"memory",autocapture:!1,disable_session_recording:!0,respect_dnt:!0});
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-dl]");
+  if(a&&window.posthog)posthog.capture("download_clicked",{platform:a.getAttribute("data-dl"),location:"content_page",page:location.pathname});
+});
+var f=document.getElementById("cap");
+if(f)f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var em=f.querySelector("input").value,msg=document.getElementById("capmsg");
+  var q=new URLSearchParams(location.search),att={referrer:document.referrer||""};
+  ["utm_source","utm_medium","utm_campaign","utm_content","ref"].forEach(function(k){if(q.get(k))att[k]=q.get(k)});
+  fetch("https://orbit-api-lxuvpz5gta-uc.a.run.app"+"/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email:em,source:"content-page",attribution:att})})
+    .then(function(r){
+      if(!r.ok)throw 0;
+      msg.textContent="Done. One email when the signed builds are out, and nothing else.";
+      f.style.display="none";
+      if(window.posthog)posthog.capture("lead_captured",{source:"content-page",page:location.pathname});
+    })
+    .catch(function(){msg.style.color="#ffad9b";msg.textContent="That did not go through. Email rajveerpatel.2450@gmail.com and you will be added by hand."});
+});
+</script>
+</body>
+</html>
